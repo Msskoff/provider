@@ -1,0 +1,129 @@
+/*
+ * Identité visuelle provisoire. Toutes les couleurs, polices et espacements
+ * passent par ces variables : changer d'identité ne touche pas aux composants.
+ * Contrastes vérifiés WCAG AA (texte courant ≥ 4,5:1) en clair et en sombre.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Couleurs — thème clair */
+  --color-bg: #ffffff;
+  --color-surface: #f5f6f7;
+  --color-text: #1a1d21; /* 16,5:1 sur --color-bg */
+  --color-text-muted: #5b6470; /* 6,0:1 sur --color-bg */
+  --color-border: #d9dde2;
+  --color-accent: #0f6b5c; /* 6,4:1 sur --color-bg */
+  --color-accent-contrast: #ffffff; /* texte posé sur l'accent */
+  --color-focus: #0f6b5c;
+
+  /* Typographie : polices système, aucun téléchargement */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --line-height: 1.6;
+
+  /* Espacements */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2.5rem;
+  --content-max-width: 72rem;
+  --reading-max-width: 42rem;
+  --page-gutter: 1rem;
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #111417;
+    --color-surface: #191d21;
+    --color-text: #e8eaed; /* 15,6:1 sur --color-bg */
+    --color-text-muted: #a3abb5; /* 8,0:1 sur --color-bg */
+    --color-border: #2c3238;
+    --color-accent: #5cc8b2; /* 9,1:1 sur --color-bg */
+    --color-accent-contrast: #111417;
+    --color-focus: #5cc8b2;
+  }
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --page-gutter: 2rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--line-height);
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.15em;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus visible pour la navigation au clavier */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Lien d'évitement : visible seulement au focus */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skip-link {
+    transition: transform 0.15s ease-out;
+  }
+}
